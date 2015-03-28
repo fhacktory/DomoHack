@@ -1,8 +1,8 @@
-For application mobile-android
-========
+# For application mobile-android
+
+## Initial Hello World built with Cordova & Android SDK
 
 *2015-03-28 15h02*
-Initial Hello World built with Cordova & Android SDK
 
 * Platforms/ excluded from the project foleder
 * Prerequisites
