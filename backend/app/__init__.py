@@ -8,17 +8,20 @@ from yapsy.PluginManager import PluginManagerSingleton
 class ListDevices(restful.Resource):
     def get(self):
         list = {
-            'sonde1' : {
+            {
+                'id' : 'sonde1',
                 'famille' : 'sonde',
                 'type' : 'temperature',
                 'unite' : '°C'
             },
-            'sonde2' : {
+            {
+                'id' : 'sonde2',
                 'famille' : 'sonde',
                 'type' : 'lumiere',
                 'unite' : 'LUX'
             },
-            'prise1' : {
+            {
+                'id' : 'prise1',
                 'famille' : 'prise',
                 'type' : 'on/off',
                 'unite' : 'boolean'
