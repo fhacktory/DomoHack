@@ -1,0 +1,8 @@
+flask:
+    image: domohack/backbone-flask:latest
+    name: flask
+    ports:
+        - ":80:80"
+        - ":5000:5000"
+    volumes:
+        - ./app:/usr/share/nginx/html:rw 
