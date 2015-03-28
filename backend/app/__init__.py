@@ -7,7 +7,7 @@ from yapsy.PluginManager import PluginManagerSingleton
 
 class ListDevices(restful.Resource):
     def get(self):
-        list = {
+        list = [
             {
                 'id' : 'sonde1',
                 'famille' : 'sonde',
@@ -26,13 +26,12 @@ class ListDevices(restful.Resource):
                 'type' : 'on/off',
                 'unite' : 'boolean'
             }
-        }
+        ]
         return list
 
 def create_app(config_name):
     app = Flask(__name__)
     api = restful.Api(app)
-    #api.add_resource(BonjourLeRest,'/rest/hello')
     plugins = PluginManagerSingleton.get()
     plugins.setPluginPlaces(
         ['%s/../plugins/' % os.path.dirname(os.path.realpath(__file__))]
@@ -43,6 +42,7 @@ def create_app(config_name):
         plugins.activatePluginByName(plugin.name)
         api.add_resource(plugin.plugin_object.__class__, plugin.plugin_object.route())
     api.add_resource(ListDevices,'/rest/list')
+    print api
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
     return app
