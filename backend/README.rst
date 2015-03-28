@@ -35,3 +35,34 @@ HelloWorld
 .. code-block::
 
      curl http://localhost:5000/rest/hello -d "value=christophe" -X PUT
+
+
+Sonde
+~~~~~
+
+* Get 
+
+.. code-block::
+
+    curl http://localhost:5000/rest/sonde/[Nom de la sonde] -X GET
+
+* PUT
+
+.. code-block::
+
+     curl http://localhost:5000/rest/sonde/[Nom de la sonde] -d "value=3" -X PUT
+
+Prise
+~~~~~
+
+* Get : Retourne le status de la prise (0,1)
+
+.. code-block::
+
+    curl http://localhost:5000/rest/prise[Nom de la prise] -X GET
+
+* PUT : Mettre dans Value 1, ou 0
+
+.. code-block::
+
+     curl http://localhost:5000/rest/prise[Nom de la prise] -d "value=0" -X PUT
