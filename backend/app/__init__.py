@@ -30,19 +30,20 @@ class ListDevices(restful.Resource):
         return list
 
 def create_app(config_name):
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/static')
+
+    from .zwave import zwave as zwave_blueprint
+    app.register_blueprint(zwave_blueprint)
     api = restful.Api(app)
     plugins = PluginManagerSingleton.get()
     plugins.setPluginPlaces(
         ['%s/../plugins/' % os.path.dirname(os.path.realpath(__file__))]
     )
     plugins.collectPlugins()
-    print plugins.getAllPlugins()
     for plugin in plugins.getAllPlugins():
         plugins.activatePluginByName(plugin.name)
         api.add_resource(plugin.plugin_object.__class__, plugin.plugin_object.route())
     api.add_resource(ListDevices,'/rest/list')
-    print api
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
     return app
