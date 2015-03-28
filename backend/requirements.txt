@@ -4,6 +4,7 @@ Flask-Script==2.0.5
 Jinja2==2.7.3
 MarkupSafe==0.23
 Werkzeug==0.10.4
+Yapsy==1.10.423
 aniso8601==0.92
 itsdangerous==0.24
 pytz==2015.2
