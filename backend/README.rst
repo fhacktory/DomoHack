@@ -11,6 +11,12 @@ Installation
 
     pip install -f requirements.txt
 
+* Démarrage du serveur
+
+.. code-block:: bash
+
+    python manage.py runserver
+
 
 Architecture
 ------------
@@ -59,10 +65,10 @@ Prise
 
 .. code-block::
 
-    curl http://localhost:5000/rest/prise[Nom de la prise] -X GET
+    curl http://localhost:5000/rest/prise/[Nom de la prise] -X GET
 
 * PUT : Mettre dans Value 1, ou 0
 
 .. code-block::
 
-     curl http://localhost:5000/rest/prise[Nom de la prise] -d "value=0" -X PUT
+     curl http://localhost:5000/rest/prise/[Nom de la prise] -d "value=0" -X PUT
