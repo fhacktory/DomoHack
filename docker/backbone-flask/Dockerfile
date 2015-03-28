@@ -1,4 +1,4 @@
-FROM domofwk/nginx
+FROM yougos666/docker-nginx
 
 RUN apt-get update && \
 	mkdir -p  /usr/share/nginx/html/js && \	
@@ -6,6 +6,11 @@ RUN apt-get update && \
 	pip install flask && \
 	apt-get autoremove && \
 	apt-get clean
+
+ADD start.sh /usr/local/bin/start.sh
+RUN chmod -v +x /usr/local/bin/start.sh
+
+ADD supervisord.conf /etc/supervisord.conf
 
 EXPOSE 80 5000
 

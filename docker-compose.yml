@@ -4,4 +4,6 @@ backboneflask:
         - ":80:80"
         - ":5000:5000"
     volumes:
-        - ./app:/usr/share/nginx/html:rw 
+        - ./backend:/opt/backend:rw 
+        - ./frontend/app:/usr/share/nginx/html:rw 
+
