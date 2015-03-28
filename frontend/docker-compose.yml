@@ -1,0 +1,7 @@
+backboneflask:
+    image: domohack/backbone-flask:latest
+    ports:
+        - ":80:80"
+        - ":5000:5000"
+    volumes:
+        - ./app:/usr/share/nginx/html:rw 
