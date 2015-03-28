@@ -1,4 +1,4 @@
-define([ "backbone", "views/index", "service" ], function(Backbone, IndexView, Service) {
+define([ "backbone", "views/index", "views/list" ], function(Backbone, IndexView, ListView) {
 	var AppRouter = Backbone.Router.extend({
 		routes : {
 			'list' : 'list',
@@ -13,18 +13,9 @@ define([ "backbone", "views/index", "service" ], function(Backbone, IndexView, S
 		});
 		
 		router.on('route:list', function() {
-			console.log(Service);
-			var service =  new Service();
-			/*Service.set({"type": "list"});
-			console.log(Service.get('type'));
-			/*require([ 'views/optimize/page' ], function(OptimizePage) {
-				var optimizePage = Vm.create(appView, 'OptimizePage',
-						OptimizePage);
-				optimizePage.render();
-			});*/
-			console.log('dede');
-			alert('dede');
+			new ListView();
 		});
+		
 		Backbone.history.start();
 	};
 	return {
