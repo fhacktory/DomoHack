@@ -15,7 +15,7 @@ SoftwareSerial RFIDReader(RxPin,TxPin);
 String RFIDTAG = "";
 String DisplayTAG = "";
 
-int ledPin13 = 13;
+int ledPin9 = 9;
 int mode = 0;
 int status = WL_IDLE_STATUS;  
 
@@ -29,7 +29,7 @@ void setup() {
   RFIDReader.begin(RFIDSerialRate);
   pinMode(RFIDEnablePin,OUTPUT);
   digitalWrite(RFIDEnablePin, LOW);  
-  Serial.begin( BAUDRATE );
+  Serial.begin(BAUDRATE);
   Serial.println("Attempting to connect to WPA network...");
   status = WiFi.begin(ssid, pass);
   if ( status != WL_CONNECTED) {
@@ -39,7 +39,7 @@ void setup() {
     Serial.println("Connected to network");
   }
   monServo.attach(2, 1000, 2000);
-  pinMode(ledPin13, OUTPUT);
+  pinMode(ledPin9, OUTPUT);
 }
 
 void loop() {  
