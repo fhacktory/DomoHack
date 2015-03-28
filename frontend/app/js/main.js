@@ -4,6 +4,7 @@ require.config({
 		'underscore': 'libs/underscore',
 		'backbone': 'libs/backbone',
 		'service': 'models/service',
+		'widget': 'models/widget'
 	},
 	shim: {
 		'underscore': {

@@ -9,10 +9,22 @@
         <script src="api/services/rest.js"></script>
         <script src="js/router.js"></script>  -->
 	</head>
-	<body>
+	<body>	
 		<div id="container">
-		  <div id="menu"></div>
-		  <div id="content"></div>
+<script type="text/template" id="widgetCollectionTemplate">
+    <% _.each(widgets, function (widgets) { %>
+    <div class="widget" style="background: yellow; margin-bottom:5px;">
+        <p>id: <%= widgets.id  %></p>
+		<p>Type: <%= widgets.type  %></p>
+		<p>Famille: <%= widgets.famille  %></p>
+		<p>Unité: <%= widgets.unite  %></p>
+    </div>
+    <% }); %>
+</script>		  
+		  
+		  
+		  
+		  
 		</div>
 	</body>
 </html>
