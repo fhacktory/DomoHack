@@ -34,6 +34,12 @@ list = {
                 'type' : 'on/off',
                 'switch': 72057594109837312L,
                 'unite' : 'boolean' 
+            },
+            'robot' : {
+                'name' : 'robot',
+                'id' : 8,
+                'famille' : 'robot',
+                'type' : 'intelligent',
             }
 }
 
