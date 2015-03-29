@@ -13,19 +13,13 @@
 		
 	</head>
 	<body>	
-	
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">domoHack</a>
-        </div>
-      </div>
-    </nav>
-
     <div class="container">
+      <div class="text-center">
+      <img src="img/logo_domo_px200.png" />
+      </div>
 
       <div class="starter-template">
-      	<h1>Welcome to FHacktory : get trying domoHack</h1>
+      	<h1>Get trying domoHack</h1>
 
 			<div id="select-content">
 <script type="text/template" id="widgetCollectionTemplate">
@@ -44,24 +38,30 @@
 			<div id="content" class="row" style="margin-top:10px;">
 <script type="text/template" id="Widget">
 <div id="widget-content widget-content-<%=  widget.name %>" class="col-md-3">
-	<div class="panel panel-default">
+	<div class="panel panel-default" id="panel-widget-<%=  widget.name %>">
       <div class="panel-heading">
         <h3 class="panel-title" id="panel-title"><%= widget.name %></h3>
       </div>
       <div class="panel-body" <% if ( widget.type == "on/off") { %>style="text-align:left" <% } %>>
-		<% if ( widget.type == "on/off") { %>
-			<% if (widgetValue.value) { %> 
-				<button type="button" name="<%=  widget.name %>" value="1" class="btn btn-default" id="commut">Commut to OFF</button>
-			<% } else { %> 
-				<button type="button" name="<%=  widget.name %>" value="1" class="btn btn-default" id="commut">Commut to ON</button>
-			<% } %>
+		<% if ( widget.type == "on/off") { %>			 
+			<button type="button" class="button-commut-<%=  widget.name %>"  data-value="<% if (widgetValue.value) { %>0<% } else { %>1<% } %>" data-widget="<%=  widget.name %>" class="btn btn-default" id="commut">Commut to <% if (widgetValue.value) { %>OFF<% } else { %>ON<% } %></button>
 		<% } %>
-		<!-- <span class=" glyphicon glyphicon-search" aria-hidden="true"></span> -->
+		
+		<% if ( widget.type == "intelligent") { %>			 
+			<div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">60%</div></div>
+		<% } %>
+
       </div>
 	</div>
 </div>
 </script>
-			</div>			
+			</div>
+			
+			
+			
+			
+			
+						
       </div>
     </div>
 	</body>

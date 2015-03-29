@@ -46,16 +46,29 @@ function(Backbone, _, WidgetCollection, WidgetGet, WidgetSet) {
 		    });
         },	
         renderAddItem: function(widgets, selectValue, widgetValue) {
+        	if ($('body #content').find('#panel-widget-'+selectValue).html()) {
+        		alert('Widget '+ selectValue+ ' already exist');
+        		return false;
+        	}
         	var templateAddWidget = _.template($('#Widget').html())
         	
         	$('#content', this.el).append(templateAddWidget({ "widget": widgets[selectValue], "widgetValue": widgetValue}));
         },
 	    
-        commut: function() {
-        	this.widgetSet = new WidgetSet([], {key: 'prise4', commut: 1});
+        commut: function(ev) {
+        	var value = $(ev.currentTarget).data('value');
+        	var widgetName = $(ev.currentTarget).data('widget');
+        	this.widgetSet = new WidgetSet([], {key: widgetName, commut: value});
         	this.widgetSet.fetch({
 		        complete: function (datas) {
-		        	alert('c good');
+		        	var newValue = 0;
+		        	var nameValue = "Commut to OFF";
+		        	if (!value) {
+		        		newValue = 1;
+		        		var nameValue = "Commut to ON";
+		        	}
+		        	$('body #content').find('.button-commut-'+widgetName).data('value', newValue);
+		        	$('body #content').find('.button-commut-'+widgetName).html(nameValue);
 		        }
 		    });
         }
