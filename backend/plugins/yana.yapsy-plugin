@@ -1,0 +1,9 @@
+[Core]
+Name = YANA
+Module = yana
+
+[Documentation]
+Description = Plugin pour l'appli controle vocale Yana
+Author = Christophe Brun
+Version = v0.1
+Website = http://site.cbrun.fr
