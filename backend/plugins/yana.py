@@ -10,7 +10,7 @@ class Yana(restful.Resource, IPlugin):
         self.app = app
 
     def route(self):
-        return '/yana-server/action.php?action=GET_SPEECH_COMMAND&token=b6bf2783483406bf7427fe51cc1bbc0b32e3df53'
+        return '/yana-server/action.php'
 
     def get(self):
         temperature = random()*6+17
