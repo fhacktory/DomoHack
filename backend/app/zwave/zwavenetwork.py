@@ -61,11 +61,3 @@ class ZWave(object):
                 
                 for node in self.network.nodes:
                     print node
-            
-    def get(self, nodeId, value):
-        node = self.network.nodes[int(nodeId)]
-        prise = node.get_switches()[72057594109837312L]
-        prise.data = value == "1"
-        return {'result' : prise.data} 
-        
-    

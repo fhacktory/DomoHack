@@ -4,6 +4,9 @@ from flask.ext import restful
 
 class BonjourLeRest(restful.Resource, IPlugin):
 
+    def register_app(self,app):
+        self.app = app
+
     def route(self):
         return '/rest/hello'
 

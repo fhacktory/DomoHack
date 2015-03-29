@@ -1,0 +1,9 @@
+[Core]
+Name = Prise4
+Module = prise4
+
+[Documentation]
+Description = Plugin de Prise
+author = Christophe Brun
+Version = v0.1
+Website = http://site.cbrun.fr

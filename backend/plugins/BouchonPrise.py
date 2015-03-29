@@ -5,6 +5,9 @@ from random import random
 
 class BouchonPrise(restful.Resource, IPlugin):
 
+    def register_app(self, app):
+        self.app = app
+
     def route(self):
         return '/rest/prise/<string:priseId>'
 
