@@ -3,7 +3,7 @@ import os
 from flask import Flask, request
 from flask import jsonify
 from flask.ext import restful
-from flask.ext.cors import cross_origin
+from flask.ext.cors import CORS, cross_origin
 from config import config
 from yapsy.PluginManager import PluginManagerSingleton
 
@@ -37,6 +37,7 @@ list = {
 }
 
 
+
 def create_app(config_name):
     app = Flask(__name__, static_url_path='/static')
 
@@ -53,6 +54,7 @@ def create_app(config_name):
     config[config_name].init_app(app)
 
     @app.route('/rest/prise4', methods=['GET'])
+    @cross_origin()
     def get_prise4():
         name = 'prise4'
         switch = list[name]
@@ -61,6 +63,7 @@ def create_app(config_name):
         return jsonify({'value':prise.data})
 
     @app.route('/rest/prise4/<int:value>', methods=['PUT'])
+    @cross_origin()
     def set_prise4(value):
         node = app.zwave.network.nodes[4]
         prise = node.get_switches()[72057594109837312L]
@@ -82,6 +85,13 @@ def create_app(config_name):
 
     from .zwave.zwavenetwork import ZWave
     app.zwave = ZWave(app)
+
+    def introspect(network):
+        print network.nodes
+        node7 = network.nodes[7]
+        print node7
+
+    introspect(app.zwave.network)
 
 
     @app.route('/rest/list', methods=['GET'])
