@@ -7,6 +7,36 @@ from flask.ext.cors import cross_origin
 from config import config
 from yapsy.PluginManager import PluginManagerSingleton
 
+list = {
+	    'sonde1' : {
+                'name' : 'sonde1',
+                'famille' : 'sonde',
+                'type' : 'temperature',
+                'unite' : '°C'
+            },
+            'sonde2' : {
+                'name' : 'sonde2',
+                'famille' : 'sonde',
+                'type' : 'lumiere',
+                'unite' : 'LUX'
+            },
+            'prise1' : {
+                'name' : 'prise1',
+                'famille' : 'prise',
+                'type' : 'on/off',
+                'unite' : 'boolean'
+            },
+            'prise4' : {
+                'name' : 'prise4',
+                'id' : 4,
+                'famille' : 'prise',
+                'type' : 'on/off',
+                'switch': 72057594109837312L,
+                'unite' : 'boolean' 
+            }
+}
+
+
 def create_app(config_name):
     app = Flask(__name__, static_url_path='/static')
 
@@ -24,8 +54,10 @@ def create_app(config_name):
 
     @app.route('/rest/prise4', methods=['GET'])
     def get_prise4():
-        node = app.zwave.network.nodes[4]
-        prise = node.get_switches()[72057594109837312L]
+        name = 'prise4'
+        switch = list[name]
+        node = app.zwave.network.nodes[switch['id']]
+        prise = node.get_switches()[switch['switch']]
         return jsonify({'value':prise.data})
 
     @app.route('/rest/prise4/<int:value>', methods=['PUT'])
@@ -55,34 +87,6 @@ def create_app(config_name):
     @app.route('/rest/list', methods=['GET'])
     @cross_origin()
     def get_list():
-        list = {
-	    'sonde1' : {
-                'name' : 'sonde1',
-                'famille' : 'sonde',
-                'type' : 'temperature',
-                'unite' : '°C'
-            },
-            'sonde2' : {
-                'name' : 'sonde2',
-                'famille' : 'sonde',
-                'type' : 'lumiere',
-                'unite' : 'LUX'
-            },
-            'prise1' : {
-                'name' : 'prise1',
-                'famille' : 'prise',
-                'type' : 'on/off',
-                'unite' : 'boolean'
-            },
-            'prise4' : {
-                'name' : 'prise4',
-                'id' : 4,
-                'famille' : 'prise',
-                'type' : 'on/off',
-                'switch': 72057594109837312L,
-                'unite' : 'boolean' 
-            }
-        }
         return jsonify(list)
 
 
