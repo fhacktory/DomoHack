@@ -35,9 +35,90 @@
                 <p class="event received">Device is Ready</p>
             </div>
 			<p id="user">User: Docker Man</p>
-			<p id="temprerature">Temperature: <small><sup>o</sup></small>C</p>
+			<table style="width:100%">
+				<tr>
+					<td></td>
+					<td>Name</td>
+					<td>Value</td>
+				</tr>
+				<tr>
+					<td>Temperature</td>
+					<td id="name1"></td>
+					<td id="value1"></td>
+				</tr>
+				<tr>
+					<td>Prise</td>
+					<td id="name2"></td>
+					<td id="value2"></td>
+				</tr>
+			<p id="temperature">Temperature: <small><sup>o</sup></small>C</p>
+			<p id="objtype"></p>
+			<button id="btn" onclick="changeState()"></button>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+
+		<script>
+			var xmlhttp = new XMLHttpRequest();
+			var xmlhttp1 = new XMLHttpRequest();
+			var xmlhttp2 = new XMLHttpRequest();
+			var host = "http://192.168.3.218:5000";
+			//var host = "http://localhost:80";
+			var urlList = host + "/rest/list";
+			var urlValue1 = host + "/rest/sonde1";
+			var urlValue2 = host + "/rest/prise4";
+			var obj2;
+
+		//	document.getElementById("temperature").innerHTML = "head";
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var myObj = JSON.parse(xmlhttp.responseText);
+					//var obj1 = JSON.parse(xmlhttp1.responseText);
+					obj2 = JSON.parse(xmlhttp2.responseText);
+					showInfo(myObj);
+				}
+			}
+
+			xmlhttp.open("GET", urlList, true);
+			xmlhttp.send();
+		//	xmlhttp1.open("GET", urlValue1, true);
+		//	xmlhttp1.send();
+			xmlhttp2.open("GET", urlValue2, true);
+			xmlhttp2.send();
+
+			function showInfo(arr){
+				//document.getElementById("name1").innerHTML = arr["sonde1"].name;
+				document.getElementById("name2").innerHTML = arr["prise4"].name;
+				//document.getElementById("value1").innerHTML = obj1.temperature;
+				var out = "";
+				if (obj2.value==false) {
+					out = "OFF"
+					document.getElementById("btn").innerHTML = "Turn ON"
+				}
+				if (obj2.value==true) {
+					out = "ON"
+					document.getElementById("btn").innerHTML = "Turn OFF"
+				}
+				document.getElementById("value2").innerHTML = out;
+
+			}
+
+			function changeState() {
+				if (document.getElementById("value2").innerHTML=="OFF") {
+					xmlhttp2.open("PUT", urlValue2+"/1", true);
+					xmlhttp2.send();
+					document.getElementById("value2").innerHTML = "ON";
+					document.getElementById("btn").innerHTML = "Turn OFF";
+				}
+				else if (document.getElementById("value2").innerHTML=="ON") {
+					xmlhttp2.open("PUT", urlValue2+"/0", true);
+					xmlhttp2.send();
+					document.getElementById("value2").innerHTML = "OFF";
+					document.getElementById("btn").innerHTML = "Turn ON";
+				}
+			}
+
+		</script>
     </body>
 </html>
