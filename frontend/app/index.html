@@ -9,8 +9,6 @@
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		
 		<link rel="stylesheet" href="css/style.css"">
 		
 	</head>
@@ -41,11 +39,9 @@
 
       <div class="starter-template">
       	<h1>Welcome to FHacktory : get trying domoHack</h1>
-			<div id="content"></div>
-      </div>
-    </div>
-	</body>
-	
+      	<div id="message"></div>
+
+			<div id="select-content">
 <script type="text/template" id="widgetCollectionTemplate">
 <select name="object" id="connectedObject">
 	<option value>Choose object</option>
@@ -53,5 +49,17 @@
     	<option value="<%= widgets.id  %>"><%= widgets.id  %></option> 
     <% }); %>
 </select>
-</script>	
+<button type="button" id="addWidget">Add Widget</button> 
+</script>
+			</div>
+			
+			
+			<div id="content">
+<script type="text/template" id="Widget">
+un test widget
+</script>
+			</div>			
+      </div>
+    </div>
+	</body>
 </html>
