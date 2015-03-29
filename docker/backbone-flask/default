@@ -39,7 +39,16 @@ server {
         location /rest/list {
                proxy_pass http://127.0.0.1:5000/rest/list;    
         }
+	location /rest/prise4 {
+		proxy_pass http://192.168.3.218:5000/rest/prise4;
+        }
+        location /rest/prise4/1 {
+		proxy_pass http://192.168.3.218:5000/rest/prise4/1;
+        }
 
+        location /rest/prise4/0 {
+		proxy_pass http://192.168.3.218:5000/rest/prise4/0;
+	}
         #error_page 404 /404.html;
 
         # redirect server error pages to the static page /50x.html
