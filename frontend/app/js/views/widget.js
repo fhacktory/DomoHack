@@ -1,9 +1,10 @@
-define([ "backbone", "underscore", "widget", "models/widgetCollection" ],
-function(Backbone, _, Widget, WidgetCollection) {
+define([ "backbone", "underscore", "models/widgetCollection", "models/widgetGet", "models/widgetSet" ],
+function(Backbone, _, WidgetCollection, WidgetGet, WidgetSet) {
 	var Widget = Backbone.View.extend({
 		el : $("body"),
-		initialize : function() {
+		initialize : function(options) {
 			_.bindAll(this, 'render', 'addItem');
+			_.bindAll(this, 'render', 'commut');
 			
 			this.widgetCollection = new WidgetCollection;
 			this.dataRest = false;
@@ -17,9 +18,10 @@ function(Backbone, _, Widget, WidgetCollection) {
 		},
 		
 		events: {
-	      'click button#addWidget': 'addItem'
+	      'click button#addWidget': 'addItem',
+	      'click button#commut': 'commut'
 	    },
-		
+	    
 	    template: _.template($('#widgetCollectionTemplate').html()),
 
 	    renderListe: function() {
@@ -32,10 +34,31 @@ function(Backbone, _, Widget, WidgetCollection) {
 				alert('Choose an object');
 				return false;
 			}
-			console.log(this.dataRest.responseJSON)
-	        $('#content', this.el).append("test");
-        }	
+			var widgets = this.dataRest.responseJSON;
+			this.widgetGet = new WidgetGet([], {famille: this.dataRest.responseJSON[selectValue].famille, key: selectValue});
+			this.widgetValue = false;
+			var that = this;
+			this.widgetGet.fetch({
+		        complete: function (datas) {
+		        	that.widgetValue = datas;
+		        	that.renderAddItem(widgets, selectValue, datas.responseJSON);
+		        }
+		    });
+        },	
+        renderAddItem: function(widgets, selectValue, widgetValue) {
+        	var templateAddWidget = _.template($('#Widget').html())
+        	
+        	$('#content', this.el).append(templateAddWidget({ "widget": widgets[selectValue], "widgetValue": widgetValue}));
+        },
 	    
+        commut: function() {
+        	this.widgetSet = new WidgetSet([], {key: 'prise4', commut: 1});
+        	this.widgetSet.fetch({
+		        complete: function (datas) {
+		        	alert('c good');
+		        }
+		    });
+        }
 	});
 	return Widget;
 });

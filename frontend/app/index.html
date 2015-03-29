@@ -17,21 +17,8 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="/">domoHack</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
       </div>
     </nav>
 
@@ -39,24 +26,40 @@
 
       <div class="starter-template">
       	<h1>Welcome to FHacktory : get trying domoHack</h1>
-      	<div id="message"></div>
 
 			<div id="select-content">
 <script type="text/template" id="widgetCollectionTemplate">
-<select name="object" id="connectedObject">
+<select name="object" id="connectedObject" class="form-control">
 	<option value>Choose object</option>
     <% _.each(widgets, function (widgets) { %>
-    	<option value="<%= widgets.id  %>"><%= widgets.id  %></option> 
+    	<option value="<%= widgets.name  %>"><%= widgets.name  %></option> 
     <% }); %>
 </select>
-<button type="button" id="addWidget">Add Widget</button> 
+</br>
+<button type="button" class="btn btn-default" id="addWidget">Add Widget</button> 
 </script>
 			</div>
 			
 			
-			<div id="content">
+			<div id="content" class="row" style="margin-top:10px;">
 <script type="text/template" id="Widget">
-un test widget
+<div id="widget-content widget-content-<%=  widget.name %>" class="col-md-3">
+	<div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title" id="panel-title"><%= widget.name %></h3>
+      </div>
+      <div class="panel-body" <% if ( widget.type == "on/off") { %>style="text-align:left" <% } %>>
+		<% if ( widget.type == "on/off") { %>
+			<% if (widgetValue.value) { %> 
+				<button type="button" name="<%=  widget.name %>" value="1" class="btn btn-default" id="commut">Commut to OFF</button>
+			<% } else { %> 
+				<button type="button" name="<%=  widget.name %>" value="1" class="btn btn-default" id="commut">Commut to ON</button>
+			<% } %>
+		<% } %>
+		<!-- <span class=" glyphicon glyphicon-search" aria-hidden="true"></span> -->
+      </div>
+	</div>
+</div>
 </script>
 			</div>			
       </div>

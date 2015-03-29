@@ -4,7 +4,6 @@ require.config({
 		'underscore': 'libs/underscore',
 		'backbone': 'libs/backbone',
 		'service': 'models/service',
-		'widget': 'models/widget',
 		'front': 'libs/front',
 		'bootstrap': 'libs/bootstrap'
 	},

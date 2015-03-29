@@ -1,7 +1,10 @@
 define([ "backbone"], 
 function(Backbone) {
-	var WidgetCollection = Backbone.Collection.extend({
-		url : "http://192.168.3.218:5000/rest/list",
+	var WidgetGet = Backbone.Collection.extend({
+		url: false,
+		initialize: function(models, options) {
+		    this.url = "/rest/"+options.key;
+		},
 		sync: function(method, model, options) {
             var params = _.extend({
                 type: 'GET',
@@ -9,9 +12,8 @@ function(Backbone) {
                 url: this.url,
                 processData: false,
             }, options);
-            
             return $.ajax(params);
         }
 	});
-	return WidgetCollection;
+	return WidgetGet;
 });

@@ -3,6 +3,7 @@ function(Backbone, IndexView, Widget) {
 	var AppRouter = Backbone.Router.extend({
 		routes : {
 			'widgetlist' : 'widgetlist',
+			'widgetget/:type/:key' : 'widgetget',
 			'*actions' : 'defaultAction',
 		}
 	});
@@ -15,6 +16,10 @@ function(Backbone, IndexView, Widget) {
 		
 		router.on('route:widgetlist', function() {
 			new Widget();
+		});
+		
+		router.on('route:widgetget', function(type, key) {
+			new WidgetGet(type, key);
 		});
 		
 		Backbone.history.start();
