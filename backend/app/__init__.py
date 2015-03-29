@@ -6,6 +6,7 @@ from flask.ext import restful
 from flask.ext.cors import CORS, cross_origin
 from config import config
 from yapsy.PluginManager import PluginManagerSingleton
+from influxdb import InfluxDBClient
 
 list = {
 	    'sonde1' : {
@@ -41,6 +42,9 @@ list = {
 def create_app(config_name):
     app = Flask(__name__, static_url_path='/static')
 
+    client = InfluxDBClient('192.168.3.32', 8086, 'root', 'root', 'domohack')
+       
+
     api = restful.Api(app)
     plugins = PluginManagerSingleton.get()
     plugins.setPluginPlaces(
@@ -60,7 +64,15 @@ def create_app(config_name):
         switch = list[name]
         node = app.zwave.network.nodes[switch['id']]
         prise = node.get_switches()[switch['switch']]
-        return jsonify({'value':prise.data})
+        json_return =  jsonify({'value':prise.data})
+        json_body = {
+            'name' : 'prise4',
+            'fields' : {
+                 'value' : prise.data
+            }
+        }
+        #client.write_points(json_body)
+        return json_return
 
     @app.route('/rest/prise4/<int:value>', methods=['PUT'])
     @cross_origin()
