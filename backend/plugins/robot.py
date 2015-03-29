@@ -13,5 +13,5 @@ class Robot(restful.Resource, IPlugin):
         return '/rest/robot'
 
     def get(self):
-        temperature = random()*6+17
-        return {'temperature' : '%0.2f' % temperature}
+        temperature = random()*100
+        return {'temperature' : '%d' % int(temperature)}
