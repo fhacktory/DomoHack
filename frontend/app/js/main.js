@@ -4,16 +4,24 @@ require.config({
 		'underscore': 'libs/underscore',
 		'backbone': 'libs/backbone',
 		'service': 'models/service',
-		'widget': 'models/widget'
+		'widget': 'models/widget',
+		'front': 'libs/front',
+		'bootstrap': 'libs/bootstrap'
 	},
 	shim: {
 		'underscore': {
 			exports: '_'
 		},
 		'backbone': {
-			deps: ["underscore", "jquery"],
+			deps: ["underscore", "jquery", "front"],
 			exports: 'Backbone'
-		}
+		},
+		'bootstrap': {
+			deps: ["jquery"]
+		},
+		'front': {
+			deps: ["jquery"]
+		},
 	}
 });
 

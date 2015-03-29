@@ -1,12 +1,12 @@
-define([ "backbone" ],
-function(Backbone) {
+define([ "backbone", "underscore", "views/widget" ],
+function(Backbone, _, Widget) {
 	var IndexView = Backbone.View.extend({
-		el : "body",
+		el : $("#select-content"),
 		initialize : function() {
 			this.render();
 		},
 		render: function(){
-			$(this.el).append("<h1>Hello world</h1>");
+			$(this.el).append(new Widget);
 		},
 	});
 	return IndexView;

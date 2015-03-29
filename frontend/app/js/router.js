@@ -1,7 +1,8 @@
-define([ "backbone", "views/index", "views/list" ], function(Backbone, IndexView, ListView) {
+define([ "backbone", "views/index", "views/widget"], 
+function(Backbone, IndexView, Widget) {
 	var AppRouter = Backbone.Router.extend({
 		routes : {
-			'list' : 'list',
+			'widgetlist' : 'widgetlist',
 			'*actions' : 'defaultAction',
 		}
 	});
@@ -12,8 +13,8 @@ define([ "backbone", "views/index", "views/list" ], function(Backbone, IndexView
 			new IndexView();
 		});
 		
-		router.on('route:list', function() {
-			new ListView();
+		router.on('route:widgetlist', function() {
+			new Widget();
 		});
 		
 		Backbone.history.start();

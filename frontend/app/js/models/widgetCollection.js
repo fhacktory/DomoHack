@@ -1,8 +1,8 @@
 define([ "backbone", "widget" ], 
 function(Backbone, Widget) {
 	var WidgetCollection = Backbone.Collection.extend({
-		//model: Widget,
-		url : "/testLIst",
+		model: Widget,
+		url : "/rest/list",
 		sync: function(method, model, options) {
         	
             var params = _.extend({
@@ -12,7 +12,6 @@ function(Backbone, Widget) {
                 processData: false,
             }, options);
             
-
             return $.ajax(params);
         }
         

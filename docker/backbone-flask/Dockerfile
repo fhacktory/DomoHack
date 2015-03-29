@@ -10,6 +10,8 @@ RUN apt-get update && \
 ADD start.sh /usr/local/bin/start.sh
 RUN chmod -v +x /usr/local/bin/start.sh
 
+ADD default /etc/nginx/sites-available/default
+
 ADD supervisord.conf /etc/supervisord.conf
 
 EXPOSE 80 5000
