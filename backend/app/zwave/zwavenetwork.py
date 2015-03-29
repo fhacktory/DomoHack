@@ -1,6 +1,8 @@
 import logging
 import sys,os
 import resource
+from flask.ext import restful
+zwave = True
 try:
     import openzwave
     from openzwave.node import ZWaveNode
@@ -14,7 +16,7 @@ except:
 import time
 
 
-class ZWave():
+class ZWave(restful.Resource):
 
     network=''
 
@@ -47,4 +49,11 @@ class ZWave():
                   sys.stdout.flush()
     
     	    self.network = netwrk
+
+    def get(self, nodeId, value):
+        node = self.network.nodes[int(nodeId)]
+        prise = node.get_switches()[72057594109837312L]
+        prise.data = value == "1"
+        return {'result' : prise.data} 
+        
     
