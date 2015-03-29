@@ -72,3 +72,10 @@ Prise
 .. code-block::
 
      curl http://localhost:5000/rest/prise/[Nom de la prise] -d "value=0" -X PUT
+
+
+Docker
+------
+
+docker run -d -p 8083:8083 -p 8084:8084 -e PRE_CREATE_DB="domohack" tutum/influxdb
+
