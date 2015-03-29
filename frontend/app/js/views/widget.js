@@ -19,7 +19,9 @@ function(Backbone, _, WidgetCollection, WidgetGet, WidgetSet) {
 		
 		events: {
 	      'click button#addWidget': 'addItem',
-	      'click button#commut': 'commut'
+	      'click button#commut': 'commut',
+	      'click button#progress-back': 'updateProgress',
+	      'click button#progress-cont': 'updateProgress'
 	    },
 	    
 	    template: _.template($('#widgetCollectionTemplate').html()),
@@ -51,7 +53,6 @@ function(Backbone, _, WidgetCollection, WidgetGet, WidgetSet) {
         		return false;
         	}
         	var templateAddWidget = _.template($('#Widget').html())
-        	
         	$('#content', this.el).append(templateAddWidget({ "widget": widgets[selectValue], "widgetValue": widgetValue}));
         },
 	    
@@ -69,6 +70,44 @@ function(Backbone, _, WidgetCollection, WidgetGet, WidgetSet) {
 		        	}
 		        	$('body #content').find('.button-commut-'+widgetName).data('value', newValue);
 		        	$('body #content').find('.button-commut-'+widgetName).html(nameValue);
+		        }
+		    });
+        },
+        
+        updateProgress: function(ev) {
+        	var type = $(ev.currentTarget).data('type');
+        	if (type) {
+	        	var currentValue = $(ev.currentTarget).parent().find('.progress-bar').data('value');
+	        	
+	        	var toValue = false;
+	        	if (type == "up") {
+		        	if ((currentValue + 25) <= 100) {
+		                toValue = currentValue + 25;
+		                this.animateProgress(currentValue, toValue);
+		            }
+	        	} else {
+	        		if ((currentValue - 25) >= 0) {
+		                toValue = currentValue - 25;
+		                this.animateProgress(currentValue, toValue);
+		            }
+	        	}
+        	}
+        },
+        
+        calculatePercent: function(quantity, percent) {
+    	    return quantity * percent / 100;
+        }, 
+        
+        animateProgress: function(currentValue, toValue) {
+        	this.widgetRobot = new WidgetSet([], {key: "robotw", commut: toValue});
+        	this.widgetRobot.fetch({
+		        complete: function (datas) {
+		        	$(".progress-bar").animate({ 
+			            width: toValue+"%",
+			          }, 500 );
+			    	$('.progress-bar').data('value', toValue);
+			    	$('.progress-bar').attr('aria-valuenow', toValue);
+			    	$('.progress-bar').html(toValue);
 		        }
 		    });
         }
