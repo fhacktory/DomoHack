@@ -1,8 +1,7 @@
 define([ "backbone", "widget" ], 
 function(Backbone, Widget) {
 	var WidgetCollection = Backbone.Collection.extend({
-		//model: Widget,
-		url : "/testLIst",
+		url : "/rest/list",
 		sync: function(method, model, options) {
         	
             var params = _.extend({

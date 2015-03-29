@@ -1,12 +1,12 @@
-define([ "backbone" ],
-function(Backbone) {
+define([ "backbone", "underscore", "views/list" ],
+function(Backbone, _, ListView) {
 	var IndexView = Backbone.View.extend({
-		el : "body",
+		el : $("#content"),
 		initialize : function() {
 			this.render();
 		},
 		render: function(){
-			$(this.el).append("<h1>Hello world</h1>");
+			$(this.el).append(new ListView);
 		},
 	});
 	return IndexView;

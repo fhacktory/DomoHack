@@ -3,28 +3,55 @@
 	<head>
 		<meta charset="utf-8">
 		<script data-main="js/main.js" src="js/libs/require.js"></script>
-        <!-- <script src="components/underscore.js"></script>
-        <script src="components/jquery.js"></script>
-        <script src="components/backbone.js"></script>
-        <script src="api/services/rest.js"></script>
-        <script src="js/router.js"></script>  -->
+        
+        <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="css/style.css"">
+		
 	</head>
 	<body>	
-		<div id="container">
-<script type="text/template" id="widgetCollectionTemplate">
-    <% _.each(widgets, function (widgets) { %>
-    <div class="widget" style="background: yellow; margin-bottom:5px;">
-        <p>id: <%= widgets.id  %></p>
-		<p>Type: <%= widgets.type  %></p>
-		<p>Famille: <%= widgets.famille  %></p>
-		<p>Unité: <%= widgets.unite  %></p>
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+      	<h1>Welcome to FHacktory : get trying domoHack</h1>
+			<div id="content"></div>
+      </div>
     </div>
-    <% }); %>
-</script>		  
-		  
-		  
-		  
-		  
-		</div>
 	</body>
+	
+<script type="text/template" id="widgetCollectionTemplate">
+<select name="object" id="connectedObject">
+	<option value>Choose object</option>
+    <% _.each(widgets, function (widgets) { %>
+    	<option value="<%= widgets.id  %>"><%= widgets.id  %></option> 
+    <% }); %>
+</select>
+</script>	
 </html>
