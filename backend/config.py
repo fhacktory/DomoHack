@@ -10,7 +10,7 @@ class Config:
         pass
 
 class DevConfig(Config):
-    DEBUG = True
+    DEBUG = False
 
 config = {
     'devel' : DevConfig,
