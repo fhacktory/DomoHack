@@ -81,13 +81,13 @@ function(Backbone, _, WidgetCollection, WidgetGet, WidgetSet) {
 	        	
 	        	var toValue = false;
 	        	if (type == "up") {
-		        	if ((currentValue + 25) <= 100) {
-		                toValue = currentValue + 25;
+		        	if (currentValue + 15 <= 170) {
+		                toValue = currentValue + 15;
 		                this.animateProgress(currentValue, toValue);
 		            }
 	        	} else {
-	        		if ((currentValue - 25) >= 0) {
-		                toValue = currentValue - 25;
+	        		if ((currentValue - 15) >= 0) {
+		                toValue = currentValue - 15;
 		                this.animateProgress(currentValue, toValue);
 		            }
 	        	}
