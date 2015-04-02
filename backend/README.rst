@@ -11,11 +11,19 @@ Installation
 
     pip install -f requirements.txt
 
+* HACK : IP du ROBOT en dur !!!!, il faut la changer dans plugins/robotw.py
+
 * Démarrage du serveur
 
 .. code-block:: bash
 
     python manage.py runserver
+
+* Démarrage avec connexion autre que localhost
+
+.. code-block:: bash
+
+    python manage.py runserver -h 0.0.0.0
 
 
 Architecture

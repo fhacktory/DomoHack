@@ -11,6 +11,7 @@ class Config:
 
 class DevConfig(Config):
     DEBUG = False
+    IP_ROBOT = '192.168.3.98' 
 
 config = {
     'devel' : DevConfig,

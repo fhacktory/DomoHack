@@ -48,9 +48,10 @@ list = {
 def create_app(config_name):
     app = Flask(__name__, static_url_path='/static')
 
-    client = InfluxDBClient('192.168.3.32', 8086, 'root', 'root', 'domohack')
+    #client = InfluxDBClient('192.168.3.32', 8086, 'root', 'root', 'domohack')
        
 
+    app.config.from_object(config[config_name])
     api = restful.Api(app)
     plugins = PluginManagerSingleton.get()
     plugins.setPluginPlaces(
@@ -59,8 +60,8 @@ def create_app(config_name):
     plugins.collectPlugins()
     for plugin in plugins.getAllPlugins():
         plugins.activatePluginByName(plugin.name)
+        plugin.plugin_object.register_app(app)
         api.add_resource(plugin.plugin_object.__class__, plugin.plugin_object.route())
-    app.config.from_object(config[config_name])
     config[config_name].init_app(app)
 
     @app.route('/rest/prise4', methods=['GET'])
